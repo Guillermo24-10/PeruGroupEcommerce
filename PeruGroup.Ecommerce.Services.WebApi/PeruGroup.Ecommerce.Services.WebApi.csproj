@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>705bdd3f-79ba-45c2-91d3-d1262c7babe9</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.0.0" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.0.0" />
+		<PackageReference Include="AutoMapper" Version="14.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Interface\PeruGroup.Ecommerce.Application.Interface.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Main\PeruGroup.Ecommerce.Application.Main.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Domain.Core\PeruGroup.Ecommerce.Domain.Core.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Infrastructure.Repository\PeruGroup.Ecommerce.Infrastructure.Repository.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Logging\PeruGroup.Ecommerce.Transversal.Logging.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Mapper\PeruGroup.Ecommerce.Transversal.Mapper.csproj" />
+	</ItemGroup>
+
+</Project>

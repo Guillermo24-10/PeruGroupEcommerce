@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="3.6.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Application.DTO\PeruGroup.Ecommerce.Application.DTO.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Application.Interface\PeruGroup.Ecommerce.Application.Interface.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Application.Validator\PeruGroup.Ecommerce.Application.Validator.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Domain.Entity\PeruGroup.Ecommerce.Domain.Entity.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Domain.Interface\PeruGroup.Ecommerce.Domain.Interface.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Commons\PeruGroup.Ecommerce.Transversal.Commons.csproj" />
+  </ItemGroup>
+
+</Project>
