@@ -1,0 +1,17 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.HealthCheck
+{
+    public static class HealthCheckExtensions
+    {
+        public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddHealthChecks()
+                .AddSqlServer(configuration.GetConnectionString("NorthwindConnection")!, tags: new[] { "database" })
+                .AddCheck<HealthCheckCustom>("HealthCheckCustom", tags: new[] { "custom" });
+            services.AddHealthChecksUI().AddInMemoryStorage();
+
+            return services;
+        }
+    }
+}
