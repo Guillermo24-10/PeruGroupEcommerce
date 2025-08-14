@@ -8,6 +8,7 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.HealthCheck
         {
             services.AddHealthChecks()
                 .AddSqlServer(configuration.GetConnectionString("NorthwindConnection")!, tags: new[] { "database" })
+                .AddRedis(configuration.GetConnectionString("RedisConnection")!, tags: new[] { "cache" })
                 .AddCheck<HealthCheckCustom>("HealthCheckCustom", tags: new[] { "custom" });
             services.AddHealthChecksUI().AddInMemoryStorage();
 

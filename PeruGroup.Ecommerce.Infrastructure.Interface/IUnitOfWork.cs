@@ -4,5 +4,6 @@
     {
         ICustomersRepository CustomersRepository { get; }
         IUsersRepository UsersRepository { get; }
+        ICategoriesRepository CategoriesRepository { get; }
     }
 }

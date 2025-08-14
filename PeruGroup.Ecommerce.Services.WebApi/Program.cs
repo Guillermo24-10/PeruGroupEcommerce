@@ -3,13 +3,16 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using PeruGroup.Ecommerce.Application.Main.Extensiones;
 using PeruGroup.Ecommerce.Domain.Core.Extensiones;
 using PeruGroup.Ecommerce.Infrastructure.Repository.Extensiones;
-using PeruGroup.Ecommerce.Services.WebApi.Extensiones;
+using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Authentication;
 using PeruGroup.Ecommerce.Services.WebApi.Extensiones.HealthCheck;
+using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Redis;
 using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Swagger;
 using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Versioning;
+using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Watch;
 using PeruGroup.Ecommerce.Services.WebApi.Helpers;
 using PeruGroup.Ecommerce.Transversal.Logging.Extensiones;
 using PeruGroup.Ecommerce.Transversal.Mapper.Extensiones;
+using WatchDog;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -42,32 +45,41 @@ builder.Services.AddAutenticacion(builder.Configuration); //AUTENTICACION
 builder.Services.AddVersioning(); //VERSIONADO DE API
 builder.Services.AddSwagger(); //SWAGGER
 builder.Services.AddHealthChecks(configuration); //HEALTH CHECKS
+builder.Services.AddWatchDog(configuration); //WATCHDOG
+builder.Services.AddRedisCache(configuration); //REDIS CACHE
 
 var app = builder.Build();
 
+#region CON_AMBIENTE_DE_DESARROLLO
 // PARA DESARROLLO
-//if (app.Environment.IsDevelopment())
-//{
-//    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-//    app.UseSwagger();
-//    app.UseSwaggerUI(c =>
-//    {
-//        foreach (var item in provider.ApiVersionDescriptions)
-//        {
-//            c.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
-//        }
-//    });
-//}
-var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+if (app.Environment.IsDevelopment())
 {
-    foreach (var item in provider.ApiVersionDescriptions)
+    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
-    }
-});
+        foreach (var item in provider.ApiVersionDescriptions)
+        {
+            c.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
+        }
+    });
+}
+#endregion
 
+#region CON_AMBIENTE_DE_PRODUCCION
+//var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+//app.UseSwagger();
+//app.UseSwaggerUI(c =>
+//{
+//    foreach (var item in provider.ApiVersionDescriptions)
+//    {
+//        c.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
+//    }
+//});
+#endregion
+
+
+app.UseWatchDogExceptionLogger(); //USO DE WATCHDOG
 app.UseCors(policy); //USO DE CORS
 app.UseAuthentication(); //USO DE AUTENTICACION
 app.UseAuthorization(); //USO DE AUTORIZACION
@@ -83,6 +95,12 @@ app.MapHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks
 {
     Predicate = _ => true,
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
+
+app.UseWatchDog(conf =>
+{
+    conf.WatchPageUsername = configuration["WatchDog:WatchPageUsername"];
+    conf.WatchPagePassword = configuration["WatchDog:WatchPagePassword"];
 });
 
 app.Run();

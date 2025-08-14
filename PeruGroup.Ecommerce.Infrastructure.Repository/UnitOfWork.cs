@@ -1,23 +1,21 @@
 ﻿using PeruGroup.Ecommerce.Infrastructure.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeruGroup.Ecommerce.Infrastructure.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public UnitOfWork(ICustomersRepository customersRepository, IUsersRepository usersRepository)
+        public UnitOfWork(ICustomersRepository customersRepository, IUsersRepository usersRepository, ICategoriesRepository categoriesRepository)
         {
             CustomersRepository = customersRepository;
             UsersRepository = usersRepository;
+            CategoriesRepository = categoriesRepository;
         }
 
         public ICustomersRepository CustomersRepository { get; }
 
         public IUsersRepository UsersRepository { get; }
+
+        public ICategoriesRepository CategoriesRepository { get; }
 
         public void Dispose()
         {

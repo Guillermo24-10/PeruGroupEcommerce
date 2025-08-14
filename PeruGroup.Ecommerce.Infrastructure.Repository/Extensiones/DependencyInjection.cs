@@ -11,6 +11,7 @@ namespace PeruGroup.Ecommerce.Infrastructure.Repository.Extensiones
             services.AddSingleton<DapperContext>();
             services.AddScoped<ICustomersRepository, CustomersRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
