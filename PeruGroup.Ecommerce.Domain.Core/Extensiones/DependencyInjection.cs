@@ -9,6 +9,7 @@ namespace PeruGroup.Ecommerce.Domain.Core.Extensiones
         {
             services.AddScoped<ICustomersDomain, CustomersDomain>();
             services.AddScoped<IUsersDomain, UsersDomain>();
+            services.AddScoped<ICategoriesDomain, CategoriesDomain>();
 
             return services;
         }

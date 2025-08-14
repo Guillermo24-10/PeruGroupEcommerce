@@ -10,6 +10,7 @@ namespace PeruGroup.Ecommerce.Transversal.Mapper
         {
             CreateMap<Customers, CutomersDto>().ReverseMap();
             CreateMap<Users,UsersDTO>().ReverseMap();
+            CreateMap<Categories, CategoriesDto>().ReverseMap();
             //CreateMap<Customers, CutomersDto>().ReverseMap()
             //    .ForMember(destino => destino.CustomerId, source => source.MapFrom(origen => origen.CustomerId))
             //    .ForMember(destino => destino.CompanyName, source => source.MapFrom(origen => origen.CompanyName))

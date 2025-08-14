@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones
+namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.Authentication
 {
     public static class AutenticacionExtension
     {

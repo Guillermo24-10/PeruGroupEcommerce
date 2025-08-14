@@ -10,6 +10,7 @@ namespace PeruGroup.Ecommerce.Application.Main.Extensiones
         {
             services.AddScoped<ICustomersApplication, CustomersApplication>();
             services.AddScoped<IUsersApplication, UsersApplication>();
+            services.AddScoped<ICategoriesApplication, CategoriesApplication>();
             services.AddTransient<UsersDtoValidator>();
 
             return services;
