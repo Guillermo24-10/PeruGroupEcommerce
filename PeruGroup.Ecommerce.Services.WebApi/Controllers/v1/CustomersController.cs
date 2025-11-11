@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PeruGroup.Ecommerce.Application.DTO;
-using PeruGroup.Ecommerce.Application.Interface;
+using PeruGroup.Ecommerce.Application.Interface.UseCases;
 
 namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v1
 {
@@ -19,7 +20,7 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v1
         }
 
         [HttpPost("InsertAsync")]
-        public async Task<IActionResult> InsertAsync([FromBody] CutomersDto customersDto)
+        public async Task<IActionResult> InsertAsync([FromBody] CustomerDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();
@@ -36,7 +37,7 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v1
         }
 
         [HttpPut("UpdateAsync")]
-        public async Task<IActionResult> UpdateAsync([FromBody] CutomersDto customersDto)
+        public async Task<IActionResult> UpdateAsync([FromBody] CustomerDto customersDto)
         {
             if (customersDto == null)
                 return BadRequest();

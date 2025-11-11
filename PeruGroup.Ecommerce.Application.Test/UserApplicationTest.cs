@@ -1,15 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using PeruGroup.Ecommerce.Application.Interface;
+using PeruGroup.Ecommerce.Application.Interface.UseCases;
 using PeruGroup.Ecommerce.Application.Main.Extensiones;
-using PeruGroup.Ecommerce.Domain.Core.Extensiones;
 using PeruGroup.Ecommerce.Infrastructure.Repository.Extensiones;
-using PeruGroup.Ecommerce.Transversal.Logging.Extensiones;
-using PeruGroup.Ecommerce.Transversal.Mapper.Extensiones;
-using System;
-using System.Threading.Tasks;
 
 namespace PeruGroup.Ecommerce.Application.Test
 {
@@ -34,10 +27,7 @@ namespace PeruGroup.Ecommerce.Application.Test
             services.AddSingleton<IConfiguration>(configuration);
 
             services.AddApplication();
-            services.AddInfrastructure();
-            services.AddDomain();
-            services.AddMappers();
-            services.AddLogger();
+            services.AddInfrastructure(configuration);
 
             // Logging si es necesario
             services.AddLogging();
@@ -61,7 +51,7 @@ namespace PeruGroup.Ecommerce.Application.Test
             var actual = result.Message;
 
             //Assert: Donde se comprueba que el resultado obtenido es el esperado.
-            
+
             Assert.AreEqual(mensajeEsperado, actual);
         }
 
@@ -72,7 +62,7 @@ namespace PeruGroup.Ecommerce.Application.Test
             var context = scope.ServiceProvider.GetService<IUsersApplication>();
             //Arrange: Donde se inicializan los objetos necesarios para la ejecucion del código.
             var userName = "GUIDEV";
-            var password = "123456";
+            var password = "1234567";
             var mensajeEsperado = "Usuario autenticado correctamente.";
 
             //Act: Donde se ejecuta el metodo que se va a probar y se obtiene el resultado.
@@ -91,7 +81,7 @@ namespace PeruGroup.Ecommerce.Application.Test
             var context = scope.ServiceProvider.GetService<IUsersApplication>();
             //Arrange: Donde se inicializan los objetos necesarios para la ejecucion del código.
             var userName = "GUIDEV";
-            var password = "1245789";
+            var password = "124578";
             var mensajeEsperado = "Usuario o contraseña invalidos.";
 
             //Act: Donde se ejecuta el metodo que se va a probar y se obtiene el resultado.

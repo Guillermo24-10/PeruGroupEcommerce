@@ -3,7 +3,7 @@ using PeruGroup.Ecommerce.Application.DTO;
 
 namespace PeruGroup.Ecommerce.Application.Validator
 {
-    public class UsersDtoValidator : AbstractValidator<UsersDTO>
+    public class UsersDtoValidator : AbstractValidator<UserDto>
     {
         public UsersDtoValidator()
         {

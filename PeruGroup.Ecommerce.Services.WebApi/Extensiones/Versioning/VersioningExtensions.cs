@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
+﻿using Asp.Versioning;
 
 namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.Versioning
 {
@@ -11,10 +10,10 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.Versioning
             {
                 options.ReportApiVersions = true;
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new ApiVersion(1, 0);
-                options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
-            });
-            services.AddVersionedApiExplorer(options =>
+                options.DefaultApiVersion = new ApiVersion(2, 0);
+                //options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+                options.ApiVersionReader = new UrlSegmentApiVersionReader();
+            }).AddApiExplorer(options =>
             {
                 options.GroupNameFormat = "'v'VVV";
                 options.SubstituteApiVersionInUrl = true;

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PeruGroup.Ecommerce.Application.DTO\PeruGroup.Ecommerce.Application.DTO.csproj" />
+    <ProjectReference Include="..\PeruGroup.Ecommerce.Domain.Entity\PeruGroup.Ecommerce.Domain.csproj" />
     <ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Commons\PeruGroup.Ecommerce.Transversal.Commons.csproj" />
   </ItemGroup>
 

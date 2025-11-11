@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Asp.Versioning;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PeruGroup.Ecommerce.Application.DTO;
-using PeruGroup.Ecommerce.Application.Interface;
+using PeruGroup.Ecommerce.Application.Interface.UseCases;
 using PeruGroup.Ecommerce.Services.WebApi.Helpers;
 using PeruGroup.Ecommerce.Transversal.Commons;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,7 +14,7 @@ using System.Text;
 namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v2
 {
     [Authorize]
-    [Route("api/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
     [ApiController]
     [ApiVersion("2.0")]
     public class UsersController : ControllerBase
@@ -28,7 +29,7 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v2
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Authenticate([FromBody] UsersDTO user)
+        public async Task<IActionResult> Authenticate([FromBody] UserDto user)
         {
             var response = await _usersApplication.Authenticate(user.UserName!, user.Password!);
             if (response.IsSuccess)
@@ -47,7 +48,7 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v2
             return BadRequest(response);
         }
 
-        private string GenerateToken(Response<UsersDTO> user)
+        private string GenerateToken(Response<UserDto> user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var secretKey = Encoding.ASCII.GetBytes(_appSettings.Secret!);

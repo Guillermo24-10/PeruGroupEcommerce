@@ -11,27 +11,31 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Mvc" Version="8.1.0" />
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
 		<PackageReference Include="AspNetCore.HealthChecks.Redis" Version="9.0.0" />
 		<PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="9.0.0" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI" Version="9.0.0" />
 		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="9.0.0" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="9.0.0" />
-		<PackageReference Include="AutoMapper" Version="14.0.0" />
-		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.SqlServer.Storage" Version="9.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.4" />
+		<PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="9.0.4" />
+		<PackageReference Include="WatchDog.NET" Version="1.4.12" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Extensions\PeruGroup.Ecommerce.Application.Extensions.csproj" />
 		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Interface\PeruGroup.Ecommerce.Application.Interface.csproj" />
-		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Main\PeruGroup.Ecommerce.Application.Main.csproj" />
-		<ProjectReference Include="..\PeruGroup.Ecommerce.Domain.Core\PeruGroup.Ecommerce.Domain.Core.csproj" />
-		<ProjectReference Include="..\PeruGroup.Ecommerce.Infrastructure.Repository\PeruGroup.Ecommerce.Infrastructure.Repository.csproj" />
-		<ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Logging\PeruGroup.Ecommerce.Transversal.Logging.csproj" />
-		<ProjectReference Include="..\PeruGroup.Ecommerce.Transversal.Mapper\PeruGroup.Ecommerce.Transversal.Mapper.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Application.Main\PeruGroup.Ecommerce.Application.UseCases.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Infrastructure\PeruGroup.Ecommerce.Infrastructure.csproj" />
+		<ProjectReference Include="..\PeruGroup.Ecommerce.Persistence\PeruGroup.Ecommerce.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>
