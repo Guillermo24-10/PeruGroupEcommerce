@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# --- Archivos de configuración local (añadido por Guillermo) ---
+PeruGroup.Ecommerce.Services.WebApi/appsettings.Development.json
+appsettings.Development.json
