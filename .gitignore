@@ -365,3 +365,7 @@ FodyWeavers.xsd
 # --- Archivos de configuración local (añadido por Guillermo) ---
 PeruGroup.Ecommerce.Services.WebApi/appsettings.Development.json
 appsettings.Development.json
+
+# Ignorar todos los appsettings locales
+**/appsettings.*.json
+!**/appsettings.json
