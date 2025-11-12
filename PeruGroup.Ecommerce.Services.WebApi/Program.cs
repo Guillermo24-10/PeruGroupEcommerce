@@ -1,5 +1,6 @@
 using Asp.Versioning.ApiExplorer;
 using HealthChecks.UI.Client;
+using PeruGroup.Ecommerce.Application.Interface.Presentation;
 using PeruGroup.Ecommerce.Application.Main.Extensiones;
 using PeruGroup.Ecommerce.Infrastructure;
 using PeruGroup.Ecommerce.Infrastructure.Repository.Extensiones;
@@ -14,6 +15,7 @@ using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Swagger;
 using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Versioning;
 using PeruGroup.Ecommerce.Services.WebApi.Extensiones.Watch;
 using PeruGroup.Ecommerce.Services.WebApi.Helpers;
+using PeruGroup.Ecommerce.Services.WebApi.Services;
 using WatchDog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,7 +36,7 @@ builder.Services.AddInfrastructureServices(); //SERVICIOS DE INFRAESTRUCTURA (EV
 builder.Services.AddApplication(); //APLICACION
 builder.Services.AddInfrastructure(configuration); //INFRAESTRUCTURA
 builder.Services.AddGlobalException(); //MIDDLEWARE DE EXCEPCIONES
-
+builder.Services.AddScoped<ICurrentUser, CurrentUser>(); //SERVICIO DE USUARIO ACTUAL
 builder.Services.AddAutenticacion(builder.Configuration); //AUTENTICACION
 builder.Services.AddVersioning(); //VERSIONADO DE API
 builder.Services.AddSwagger(); //SWAGGER

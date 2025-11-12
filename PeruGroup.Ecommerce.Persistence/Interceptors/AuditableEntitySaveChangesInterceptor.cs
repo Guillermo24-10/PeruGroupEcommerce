@@ -1,20 +1,28 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using PeruGroup.Ecommerce.Application.Interface.Presentation;
 using PeruGroup.Ecommerce.Domain.Common;
 
 namespace PeruGroup.Ecommerce.Persistence.Interceptors
 {
     public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
     {
+        private readonly ICurrentUser _currentUser;
+
+        public AuditableEntitySaveChangesInterceptor(ICurrentUser currentUser)
+        {
+            _currentUser = currentUser;
+        }
+
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
         {
             UpdateEntities(eventData.Context);
             return base.SavingChanges(eventData, result);
         }
-        public override ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
+        public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             UpdateEntities(eventData.Context);
-            return base.SavedChangesAsync(eventData, result, cancellationToken);
+            return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
         public void UpdateEntities(DbContext? context)
         {
@@ -24,13 +32,13 @@ namespace PeruGroup.Ecommerce.Persistence.Interceptors
             {
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Entity.CreatedBy = "system";
+                    entry.Entity.CreatedBy = _currentUser.UserName;
                     entry.Entity.Created = DateTime.Now;
                 }
 
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.Entity.LastModifiedBy = "system";
+                    entry.Entity.LastModifiedBy = _currentUser.UserName;
                     entry.Entity.LastModified = DateTime.Now;
                 }
             }

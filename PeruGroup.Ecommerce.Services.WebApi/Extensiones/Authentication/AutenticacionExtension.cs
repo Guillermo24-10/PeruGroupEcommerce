@@ -12,6 +12,8 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.Authentication
             var issuer = configuration["Config:Issuer"]!;
             var audience = configuration["Config:Audience"]!;
 
+            services.AddHttpContextAccessor();
+
             _ = services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

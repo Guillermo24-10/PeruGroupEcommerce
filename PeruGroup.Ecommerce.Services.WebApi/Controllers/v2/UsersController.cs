@@ -53,18 +53,22 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Controllers.v2
             var tokenHandler = new JwtSecurityTokenHandler();
             var secretKey = Encoding.ASCII.GetBytes(_appSettings.Secret!);
 
+            var claims = new Dictionary<string, object>
+            {
+                { "userid", user.Data!.FirstName! },
+                { "username", user.Data!.UserName! },
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Data!.UserId.ToString()),
-                    new Claim("username", user.Data!.UserName!),
-                    new Claim("firstName", user.Data!.FirstName!),
-                    new Claim("lastName", user.Data!.LastName!)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 Issuer = _appSettings.Issuer,
                 Audience = _appSettings.Audience,
+                Claims = claims,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
             };
 
