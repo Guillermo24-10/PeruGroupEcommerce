@@ -2,7 +2,6 @@
 using PeruGroup.Ecommerce.Application.DTO;
 using PeruGroup.Ecommerce.Application.UseCases.Customers.Commands.CreateCustomerCommand;
 using PeruGroup.Ecommerce.Application.UseCases.Customers.Commands.UpdateCustomerCommand;
-using PeruGroup.Ecommerce.Application.UseCases.Users.Commands.CreateUserTokenCommand;
 using PeruGroup.Ecommerce.Domain.Entities;
 using PeruGroup.Ecommerce.Domain.Events;
 using Disco = PeruGroup.Ecommerce.Domain.Entities.Discount;

@@ -31,24 +31,23 @@ namespace PeruGroup.Ecommerce.Services.WebApi.Extensiones.Swagger
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-        {
-            {
-                new OpenApiSecurityScheme
                 {
-                    Reference = new OpenApiReference
                     {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference // Usa el tipo correcto y asegúrate de tener el using correcto
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
                     }
-                },
-                Array.Empty<string>()
-            }
-        });
+                });
             });
 
             return services;
         }
-
 
     }
 }
